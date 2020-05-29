@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      text-align: center;
+    }
+    .box {
+      border: 4px dotted pink;
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <video muted id="video" width="320" src="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"></video>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <script>
+    //https://developer.mozilla.org/es/docs/Web/API/Intersection_Observer_API
+    /*const configObserver = {
+      root, //area por defecto de vista, el default son los 100vh y 100vw
+      rootMargin, // play px antes de llegar al video
+      threshold // play en vista del video total o parcial
+    }*/
+    const $video = document.querySelector('#video')
+    $video.addEventListener('play', () => {
+      console.log('Reproduce el video')
+    })
+    $video.addEventListener('pause', () => {
+      console.log('Pausa el video')
+    })
+    
+    const observerConfig = {
+      //root: //tamaño del 
+      rootMargin: '0px 0px 0px 0px', //anteponerse al video
+      threshold: 1 //% del video dentro de lo visto
+    }
+    function callbackObserver(entries, observer) {
+      //console.log("se llamo al callback")
+      //entries son los datos que obtenemos del video
+      //isIntersecting es un estado en el que sabemos si la config se cumple o no
+      if (entries[0].isIntersecting) {
+        $video.play()
+      } else {
+        $video.pause()
+      }
+    }
+    const observerObject = new IntersectionObserver(callbackObserver, observerConfig) //hereda del observer
+    observerObject.observe($video)
+  </script>
+</body>
+</html>
