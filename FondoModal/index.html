@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlay para enfocar y para modales</title>
+  <style>
+    body {
+      background:wheat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      background: whitesmoke;
+      padding: 18px;
+      width: 350px;
+      box-shadow: 0 0px 8px -2px rgb(130, 130, 130);
+      border-radius: 4px;
+    }
+    label {
+      font-weight: bold;
+      color: grey;
+      text-align: center;
+      padding: 16px;
+      border-bottom:1px solid rgba(169, 169, 169, 0.317);
+    }
+    input {
+      padding: 8px 10px;
+      border: 1px solid rgba(159, 159, 159,.4);
+      border-radius: 2px;
+      outline:none;
+      margin:8px 0;
+    }
+    button {
+      background: rgb(84, 169, 84);
+      color: white;
+      border: none;
+      height:30px;
+      outline:none;
+      border-radius: 4px;
+      margin:8px 0;
+    }
+    button:active {
+      background:rgb(56, 114, 56);
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom:0;
+      display:none;
+    }
+    .overlay.is-active{
+      display:block;
+    }
+    input.is-active {
+      position: relative;
+      z-index: 2;
+    }
+    button {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <form action="">
+    <label>Inicia Sesión</label>
+    <input type="text" name="name" placeholder="Usuario" autocomplete="off" required>
+    <input type="password" name="password" placeholder="Contraseña" autocomplete="off" required>
+    <button type="submit">Enviar</button>
+  </form>
+  <div class="overlay" id="overlay"></div>
+  <script>
+    // un array que contiene todos los inputs
+    const $inputList = document.querySelectorAll('input')
+    const $overlay = document.querySelector('#overlay');
+
+    // iterar los inputs para asignarles funciones
+    $inputList.forEach($input => {
+      //focus es cuando seleccionas el campo
+      $input.addEventListener('focus', focus)
+      // blur es el hecho de dejar de seleccionar el campo
+      $input.addEventListener('blur', blur)
+    })
+
+    $overlay.addEventListener('click', event => {
+      $overlay.classList.remove('is-active')
+      /*al hacer click en el overlay quitamos el overlay
+      pero tambien obtenemos las coordenadas de donde hicimos click
+      mediante event.clientX y event.clientY
+      mediante elementFromPoint obtenemos què elemento fue cliqueado
+      y lo guardamos en una variable
+      */
+      const $maybeIsAnInput = document.elementFromPoint(event.clientX, event.clientY)
+
+      /*Si el elemento es un input aplicamos focus en él*/
+      if ($maybeIsAnInput.tagName === 'INPUT') {
+        $maybeIsAnInput.focus()
+      }
+
+    })
+
+    function focus(event) {
+      console.log('este es un focus')
+      event.target.classList.add('is-active')
+      $overlay.classList.add('is-active')
+    }
+
+    function blur(event) {
+      console.log('este es un blur')
+      event.target.classList.remove('is-active')
+
+    }
+
+  </script>
+</body>
+</html>
