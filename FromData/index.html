@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlay para enfocar y para modales</title>
+  <style>
+    body {
+      background:wheat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      background: whitesmoke;
+      padding: 18px;
+      width: 350px;
+      box-shadow: 0 0px 8px -2px rgb(130, 130, 130);
+      border-radius: 4px;
+    }
+    label {
+      font-weight: bold;
+      color: grey;
+      text-align: center;
+      padding: 16px;
+      border-bottom:1px solid rgba(169, 169, 169, 0.317);
+    }
+    input {
+      padding: 8px 10px;
+      border: 1px solid rgba(159, 159, 159,.4);
+      border-radius: 2px;
+      outline:none;
+      margin:8px 0;
+    }
+    button {
+      background: rgb(84, 169, 84);
+      color: white;
+      border: none;
+      height:30px;
+      outline:none;
+      border-radius: 4px;
+      margin:8px 0;
+    }
+    button:active {
+      background:rgb(56, 114, 56);
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom:0;
+      display:none;
+    }
+    .overlay.is-active{
+      display:block;
+    }
+    input.is-active {
+      position: relative;
+      z-index: 2;
+    }
+    button {
+      position: relative;
+      z-index: 2;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <form id="form">
+    <label>Completa tu información</label>
+    <input type="text" name="username" placeholder="Nombre de Usuario" autocomplete="off" required>
+    <input type="file" name="image" id="file">
+    <div class="preview">
+      <p id="username"></p>
+      <img id="image">
+    </div>
+    <button type="submit">Enviar</button>
+
+  </form>
+  <script>
+    //guardamos todo el form en una variable para tener acceso a sus eventos
+    const $form = document.querySelector('#form')
+
+
+
+    //cuando se desate el evento submit
+    //la arrow function señala que aqui mismo declararemos la funcion que desencadena
+    $form.addEventListener('submit', (event) => {
+      event.preventDefault() //para que el clic no recargue
+      //objeto de js FromData que recive un form
+      //currentTarget toma el padre del evento como objeto, en este caso el form
+      //se guarda como una const porque guardamos los datos regresados
+      const formData = new FormData(event.currentTarget)  
+      //debugger
+
+      //puedes obtener los datos del formulario mediante 
+      //formData.get('username')
+
+      //puedes mandar un dato al formulario mediante el nombre de la propiedad, incluso si no existe
+      //formData.set('username', 'real username')
+      //formData.set('text', 'Este es un campo que ahora existe')
+
+      //corro el renderUsername
+      renderUsername(formData)
+      renderImage(formData)
+
+      //ahora si a enviar al backend
+      //mediante
+      fetch('/', {
+        //ahora especifica el metodo porque no es get
+        method: 'POST', 
+        //el contenido es el objeto formData
+        body: formData
+      })
+    })
+
+
+
+
+    const $username = document.querySelector('#username')
+    function renderUsername(formData) {
+      const username = formData.get('username')
+      $username.textContent = username
+    }
+
+
+    const $image = document.querySelector('#image')
+    function renderImage(formData) {
+      //obtenemos todos los datos de la imagen subida
+      const image = formData.get('image')
+      //recuerda que la imagen es un archivo por lo que es posible verla con el lenguaje binario
+      //mediante los datos de la imagen creamos una url hacia ella y la guardamos en una const
+      const imageUrl = URL.createObjectURL(image)
+      $image.setAttribute('src', imageUrl)
+    }
+
+
+    //checar los eventos en los input file
+    const $file = document.querySelector('#file')
+    //cuando el campo file cambia se activa esta funcion anonima
+    $file.addEventListener('change', (event) => {
+      //obtenemos los datos del input file desde el id del form
+      const formData = new FormData($form)
+      //corremos la funcion renderImage y le mandamos el objeto FormData con contenido
+      renderImage(formData)
+    })
+
+
+  </script>
+</body>
+</html>
