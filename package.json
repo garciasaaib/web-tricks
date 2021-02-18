@@ -1,0 +1,41 @@
+{
+  "name": "web-tricks",
+  "version": "1.0.0",
+  "description": "Contenido de algunos cursos de HTML-CSS-JS",
+  "main": "index.js",
+  "scripts": {
+    "form": "node ./FromData/server.js",
+    "webpack:script": "webpack --entry ./webpack/src/index.js -o ./webpack/build",
+    "webpack:config": "webpack --entry ./webpack/src/index.js -o ./webpack/build --mode production",
+    "webpack:external": "webpack --config ./webpack/config/webpack.external.js",
+    "webpack:multi": "webpack --config ./webpack/config/webpack.multi.js",
+    "webpack:cssloader": "webpack --config ./webpack/config/webpack.cssloader.js",
+    "webpack:cssplugin": "webpack --config ./webpack/config/webpack.cssplugin.js",
+    "webpack:htmlplugin": "webpack --config ./webpack/config/webpack.htmlplugin.js",
+    "webpack:serve": "webpack serve --config ./webpack/config/webpack.serve.js",
+    "webpack:hotmodule": "webpack serve --config ./webpack/config/webpack.hotmodule.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adranuz/web-tricks.git"
+  },
+  "keywords": [],
+  "author": "@adreanzoe <garciasaaib@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adranuz/web-tricks/issues"
+  },
+  "homepage": "https://github.com/adranuz/web-tricks#readme",
+  "devDependencies": {
+    "@webpack-cli/init": "^1.1.3",
+    "css-loader": "^5.0.2",
+    "html-webpack-plugin": "^5.1.0",
+    "mini-css-extract-plugin": "1.3.6",
+    "style-loader": "^2.0.0",
+    "webpack": "5.21.2",
+    "webpack-cli": "4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-html-plugin": "0.1.1"
+  }
+}
