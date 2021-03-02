@@ -1,3 +1,3 @@
 const fs = require('fs');
 
-fs.writeFileSync('../.env', `API=${process.env.API}\n`);
+fs.writeFileSync('./webpack-project/.env', `API=${process.env.API}\n`);
