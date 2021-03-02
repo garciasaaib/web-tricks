@@ -14,7 +14,7 @@
     "webpack:htmlplugin": "webpack --config ./webpack/config/webpack.htmlplugin.js",
     "webpack:serve": "webpack serve --config ./webpack/config/webpack.serve.js",
     "webpack:hotmodule": "webpack serve --config ./webpack/config/webpack.hotmodule.js",
-    "webpack:build": "webpack --config ./webpack-project/webpack.config.js",
+    "webpack:build": "node ./webpack-project/scripts/create-env.js && webpack --config ./webpack-project/webpack.config.js",
     "webpack:watch": "webpack --watch --config ./webpack-project/webpack.config.js",
     "webpack:dev": "webpack --config ./webpack-project/webpack.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
