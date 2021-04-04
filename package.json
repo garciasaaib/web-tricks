@@ -53,5 +53,9 @@
     "webpack-cli": "4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-html-plugin": "0.1.1"
+  },
+  "dependencies": {
+    "create-snowpack-app": "^1.10.0",
+    "husky": "^6.0.0"
   }
 }
