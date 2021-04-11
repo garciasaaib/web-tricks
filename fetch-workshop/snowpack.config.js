@@ -6,7 +6,6 @@ module.exports = {
   },
   buildOptions: {
     baseUrl: '',
-    out: './build',
     
   },
 }
