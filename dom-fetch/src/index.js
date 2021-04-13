@@ -8,6 +8,11 @@ console.log("Happy hacking :)");
 const baseUrl = "https://platzi-avo.vercel.app";
 const container = document.querySelector('#container')
 container.className = 'flex flex-wrap justify-center '
+container.addEventListener('click', e => {
+  if (e.target.nodeName === 'H2') {
+    alert('hola')
+  }
+})
 
 /* web API intl: internasionalization
 - format dates
@@ -29,7 +34,7 @@ const formatPrice = (price) => {
 window
   .fetch(`${baseUrl}/api/avo`)
   .then((response) => response.json())
-  .then(responseJson => {
+  .then((responseJson) => {
     const cards = []
     responseJson.data.forEach(item => {
       // crear titulo
