@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:khaki;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+  <img src="" id="pokemon" height="200" alt="">
+  <p id="message"></p>
+  <script>
+
+    const $pokemon = document.querySelector('#pokemon')
+    const $message = document.querySelector('#message')
+    function renderPokemon(image) {
+      $pokemon.setAttribute('src', image)
+    }
+    //first fetch
+    function firstFetch(){
+      fetch('https://pokeapi.co/api/v2/pokemon/25')
+      .then(response => response.json())
+      //first asing 
+      .then(data => renderPokemon(data.sprites.front_default))
+      .catch(()=> {
+        renderMessage('No se encontro el pokemon :(')
+      })
+    }
+    firstFetch()
+  
+
+    //-------adicional functions
+    function renderMessage(message) {
+      $message.textContent = message
+    }
+    const compras = []
+
+    function buy(thingToBuy, time = 2000) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          renderMessage(`${thingToBuy} ✅`)
+          resolve(`${thingToBuy} ✅`)
+        }, time)
+      })
+    }
+
+
+    // Promise all llama a todas las promesas al mismo tiempo y las retorna conforme ellas se cumplen
+    console.time()
+    Promise.all([
+      buy('frutas', 5000),
+      buy('verduras', 2000),
+      buy('carne', 1000),
+      buy('granos', 3000),
+    ])
+    .then((cart) => { // cuando se cumplieron todas las promesas pasa el then
+      console.timeEnd()
+      renderMessage(cart.toString())
+    })
+
+/* Corre uno por uno los then de la promesa
+   function shopping() {
+      const cart = []
+      // corre buy y cuando termina, corre otra funcion buy
+      // cada vez almacendando el dato en un array
+      // al final solo retorna el cart
+      return buy('fruta')
+      .then(thing => { cart.push(thing); return buy('verduras') })
+      .then(thing => { cart.push(thing); return buy('carne') })
+      .then(thing => { cart.push(thing); return buy('granos') })
+      .then(thing => { cart.push(thing); return buy('listo') })
+      .then(thing => { cart.push(thing); return cart })
+    }
+    shopping() // entra toda la funcion
+    .then((thing) => { // cuando acaba la funcion hace esto
+      renderMessage(thing.toString())
+    })
+*/
+
+
+
+    /* resolve y reject son funciones que se ejecutan despues de ejecutar la promesa
+    resolve: cuando se ejecuta correctamente
+    reject: cuando hay un error
+    */
+
+    /* funcion para comprar cosas
+    En resumen, buy es una funcion normal como cualquier otra
+    que contiene un parametro thing y un parametro time
+
+    el escrito return es para que terminando la promesa se salga de la funcion, que este escrito 'new Promise' solo significa que la funcion buy */
+
+    /*const shopping = new Promise((resolve, reject) => {
+      console.log('Es un bonito dia para ir de compras, vamos primero por la fruta')
+      setTimeout(() => {
+        compras.push('frutas')
+        console.log('Ya tengo las frutas, podemos ir por las verduras')
+        setTimeout(() => {
+          compras.push('verduras')
+          console.log('Ya tengo las verduras, podemos ir por los granos')
+          //reject('Oh dios mio algo ha fallado') //aqui ya fallo por lo que no corre el then
+          setTimeout(() => {
+            compras.push('granos')
+            console.log('Ya tengo los granos, vamos a pagar')
+            setTimeout(() => {
+              compras.push('fila')
+              console.log('Ya es mi turno, suelta la feria')
+              setTimeout(() => {
+                compras.push('pagando')
+                console.log('ya pagado, amonos!')
+                console.log(compras)
+                resolve(compras) //al poner el resolve ya podemos usar then
+              }, 2000)
+            }, 2000)
+          }, 2000)
+        }, 2000)
+      },2000)
+    })
+    //al terminar el contenido de mi funcion promesa, se desata el then
+    shopping.then((data) => {
+      renderMessage(data.toString())
+    })
+    */
+
+    
+
+    /* funcion callback to hell
+    function irDeCompras() {
+      console.log('Es un bonito dia para ir de compras, vamos primero por la fruta')
+      setTimeout(() => {
+        compras.push('frutas')
+        console.log('Ya tengo las frutas, podemos ir por las verduras')
+        setTimeout(() => {
+          compras.push('verduras')
+          console.log('Ya tengo las verduras, podemos ir por los granos')
+          setTimeout(() => {
+            compras.push('granos')
+            console.log('Ya tengo los granos, vamos a pagar')
+            setTimeout(() => {
+              compras.push('fila')
+              console.log('Ya es mi turno, suelta la feria')
+              setTimeout(() => {
+                compras.push('pagando')
+                console.log('ya pagado, amonos!')
+                console.log(compras)
+              }, 2000)
+            }, 2000)
+          }, 2000)
+        }, 2000)
+      },2000)
+    }
+    irDeCompras()
+    */
+  </script>
+</body>
+</html>

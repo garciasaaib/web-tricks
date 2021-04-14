@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	main {
+		display: grid;
+		grid-template-columns: 1fr 350px;
+	}
+	summary {
+		cursor: pointer;
+		outline: 0;
+
+	}
+</style>
+</head>
+<body>
+	<main>
+		<section>
+			<h1>Hola Mundo</h1>
+		</section>
+		<nav>
+
+			<details open>
+				<summary>
+					INSTALACIÓN
+				</summary>
+				<ol>
+					<li>Empezando</li>
+					<li>Agregar React a un sitio web</li>
+					<li>Crear una nueva aplicación React</li>
+					<li>CDN Links</li>
+					<li>Canales de lanzamientos</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					CONCEPTOS PRINCIPALES
+				</summary>
+				<ol>
+					<li>1. Hola mundo</li>
+					<li>2. Presentando JSX</li>
+					<li>3. Renderizando elementos</li>
+					<li>4. Componentes y propiedades</li>
+					<li>5. Estado y ciclo de vida</li>
+					<li>6. Manejando eventos</li>
+					<li>7. Renderizado condicional</li>
+					<li>8. Listas y keys</li>
+					<li>9. Formularios</li>
+					<li>10. Levantando el estado</li>
+					<li>11. Composición vs. herencia</li>
+					<li>12. Pensando en React</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					GUÍAS AVANZADAS
+				</summary>
+				<ol>
+					<li>Accesibilidad</li>
+					<li>División de código</li>
+					<li>Contexto</li>
+					<li>Límites de errores</li>
+					<li>Reenvío de refs</li>
+					<li>Fragmentos</li>
+					<li>Componentes de orden superior</li>
+					<li>Integración con otras bibliotecas</li>
+					<li>JSX en profundidad</li>
+					<li>Optimizando el rendimiento</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					REFERENCIA DE LA API
+				</summary>
+				<ol>
+					<li>React</li>
+					<li>React.Component</li>
+					<li>ReactDOM</li>
+					<li>ReactDOMServer</li>
+					<li>Elementos DOM</li>
+					<li>SyntheticEvent</li>
+					<li>Utilidades para pruebas</li>
+					<li>Renderizador de prueba</li>
+					<li>Requerimientos del entorno de JS</li>
+					<li>Glosario</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					HOOKS (NUEVO)
+				</summary>
+				<ol>
+					<li>1. Presentando a los Hooks</li>
+					<li>2. Un vistazo a los Hooks</li>
+					<li>3. Usando el Hook de estado</li>
+					<li>4. Usando el Hook de efecto</li>
+					<li>5. Reglas de los Hooks</li>
+					<li>6. Construyendo tus propios Hooks</li>
+					<li>7. Referencia de la API de los Hooks</li>
+					<li>8. Preguntas frecuentes sobre Hooks</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					PRUEBAS
+				</summary>
+				<ol>
+					<li>Visión general de las pruebas</li>
+					<li>Recetas de pruebas</li>
+					<li>Entornos de prueba</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					MODO CONCURRENTE (EXPERIMENTAL)
+				</summary>
+				<ol>
+					<li>1. Introducción al Modo concurrente</li>
+					<li>2. Suspense para la carga de datos</li>
+					<li>3. Patrones concurrentes en interfaces de usuario</li>
+					<li>4. Adopción del Modo concurrente</li>
+					<li>5. Referencia del API del modo concurrente</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					CONTRIBUIR
+				</summary>
+				<ol>
+					<li>Cómo contribuir</li>
+					<li>Visión general de la base de código</li>
+					<li>Notas de implementación</li>
+					<li>Principios de diseño</li>
+				</ol>
+			</details>
+			
+			<details>
+				<summary>
+					PREGUNTAS FRECUENTES
+				</summary>
+				<ol>
+					<li>AJAX y APIs</li>
+					<li>Babel, JSX y pasos de compilación</li>
+					<li>Pasando funciones a componentes</li>
+					<li>Estado del componente</li>
+					<li>Estilo y CSS</li>
+					<li>Estructura de archivos</li>
+					<li>Política de versiones</li>
+					<li>DOM virtual y detalles de implementación</li>
+				</ol>
+			</details>
+			
+		</nav>
+	</main>
+		
+		<script>
+		const $detailsList = document.querySelectorAll('details')
+		//iterar cada elemento
+		$detailsList.forEach (($details) => {
+			$details.querySelector('summary').addEventListener('click', expand)
+		})
+
+		function expand() {
+			$detailsList.forEach (($details) => {
+				$details.removeAttribute('open')
+			})
+		}
+	</script>
+</body>
+</html>

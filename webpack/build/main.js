@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("Hola que hace con webpack"),console.log(2+2)})();

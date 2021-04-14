@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:khaki;
+    }
+  </style>
+</head>
+<body>
+  <img src="" id="pokemon" height="200" alt="">
+  <p id="message"></p>
+  <script>
+    // https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
+    // los headers son para autorizar el obtener los datos
+    /*fetch('url', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'asdasdas': 'asdasds'
+      }
+    })
+
+    fetch('url', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'asdasdas': 'asdasds'
+      },
+      body: JSON.stringify({
+        name: 'adrian',
+        age: 28
+      })
+    })*/
+
+    const $pokemon = document.querySelector('#pokemon')
+    const $message = document.querySelector('#message')
+
+    function renderPokemon(image) {
+      $pokemon.setAttribute('src', image)
+    }
+    //first fetch
+    function firtsFetch(){
+      fetch('https://pokeapi.co/api/v2/pokemon/9999')
+      .then(response => response.json())
+      //first asing 
+      .then(data => renderPokemon(data.sprites.front_default))
+      .catch(() => { renderMessage('Pokemon no encontrado :(')})
+    }
+    firtsFetch()
+
+    //main click
+    $pokemon.addEventListener('click', searchNew)
+    $message.addEventListener('click', searchNew)
+    
+    //main function
+    function searchNew() {
+      const pokemonNumber = getRandomInt(1, 500)
+      console.log(pokemonNumber)
+      fetching(pokemonNumber)
+    }
+
+    //-------adicional functions
+    // random int
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    //fetch and asign new pokemon picture
+    function fetching(number) {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${number}`)
+      .then(response => response.json())
+      .then(data => renderPokemon(data.sprites.front_default))
+      .then(()=> renderMessage(''))
+    }
+    function renderMessage(message) {
+      $message.textContent = message
+    }
+  </script>
+</body>
+</html>
