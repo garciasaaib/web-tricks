@@ -17,43 +17,61 @@
   <title>Snowpack & Tailwind App</title>
 </head>
 
-<body class="bg-blue-900 relative min-h-screen">
-  <!--
-      This HTML file is a template.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-
-      Start modyfing from here.
-    -->
-  <div class="py-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pb-40">
-    <h1 class="text-white font-bold text-3xl mb-4">
-      Simple Weather App</h1>
-    <form id="form" class="flex mb-14">
-      <div class="inputbox relative mr-2">
-        <input class="bg-transparent text-white pl-1 border-b-2 border-grey-500 placeholder-white focus:outline-none"
-          type="text" name='place' placeholder="Search for a city">
-        <label class="absolute left-0 right-0 top-100 text-base text-white">
-          <small class="ml-1" id="message"></small>
-        </label>
-      </div>
-      <button class="bg-red-500 rounded text-white text-xs px-3 py-1 focus:outline-none font-bold"
-        type="submit"><small>SUBMIT</small></button>
-    </form>
-    <div class="text-center mt-4">
-      <div class="flex flex-wrap" id="weatherContainer"></div>
-    </div>
+<body class="relative min-h-screen ">
+  <div class="preloader">
+    <h2 class="font-bold">Sinple Weather App</h2>
   </div>
-  <footer
-    class="bg-indigo-500 absolute bottom-0 left-0 right-0 flex flex-col justify-between px-4 text-white text-center">
+  <main class="py-10 mx-auto pb-40 ">
+    <section>
+      <h1 class="text-center text-white font-bold text-3xl mb-4">
+        Simple Weather App
+      </h1>
+      <div class="weather-app">
+        <form id="form" class="mb-14" autocomplete="off">
+          <div class="inputbox relative">
+            <input
+              class="bg-transparent text-white pl-1 border-b-2 border-grey-500 placeholder-white focus:outline-none"
+              type="text" name='place' placeholder="Search for a city">
+            <label class="absolute left-0 right-0 top-100 text-base text-white">
+              <small class="ml-1" id="message"></small>
+            </label>
+          </div>
+          <button class="bg-red-500 rounded text-white px-4 focus:outline-none font-bold" type="submit">SUBMIT</button>
+        </form>
+        <div class="cardContainer">
+          <div id="weatherContainer"></div>
+        </div>
+    </section>
+
+    <section class="video-section">
+      <div class="">
+
+        <h2 class="text-white">Think about our planet</h2>
+        <p class="text-white text-base">Watch this video...</p>
+        <div id='videoContainer m-2'>
+          <div id="video"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  </div>
+
+  <footer class="absolute bottom-0 left-0 right-0 flex flex-col justify-between px-4 text-white text-center">
     <a class="text-base"
       href="https://webdesign.tutsplus.com/tutorials/build-a-simple-weather-app-with-vanilla-javascript--cms-33893?_ga=2.260917965.1982543888.1617676850-1272339854.1617676850"
       target="_blank">Based in this view</a>
-    <p class="text-base"><small>Build with 🧠,👁‍🗨,⌚,🤯 & ☕ by @adranuz</small></p>
+    <p class="text-base"><small>Build by @adranuz</small></p>
   </footer>
 
+
+  <script src="https://www.youtube.com/iframe_api"></script>
   <!-- Add more scripts here -->
   <script type="module" src="%PUBLIC_URL%/_dist_/index.js"></script>
+
+
+  
+
 </body>
 
 </html>

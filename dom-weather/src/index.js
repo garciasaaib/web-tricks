@@ -1,4 +1,7 @@
 import hs from "hyperscript";
+import buildVideo from './video';
+
+buildVideo()
 
 const form = document.getElementById("form");
 const weatherContainer = document.getElementById("weatherContainer");
@@ -18,18 +21,26 @@ form.addEventListener("submit", async function (e) {
   e.preventDefault();
   const inputText = e.target[0].value;
   if (!inputText) return validateMessage("empty");
+  
   const apiURL = api(inputText);
   const response = await fetch(apiURL);
   const data = await response.json();
+  
   if (data.cod == 200) {
     console.log(cardList);
     const idExists = cardList.includes(data.sys.id)
-    if (idExists) return validateMessage("double")
+  
+    if (idExists) {
+      e.target[0].value = ""
+      return validateMessage("double")
+    }
+  
     cardList.push(data.sys.id)
     const card = createCard(data);
     weatherContainer.append(card);
     e.target[0].value = "";
     return validateMessage("clean");
+
   } else {
     e.target[0].value = "";
     return validateMessage("notExists");
@@ -63,3 +74,15 @@ const createCard = (data) => {
 
   return card;
 };
+
+window.onload = function() {
+  stopPreloader()
+}
+
+const stopPreloader = () => {
+  const preloader = document.getElementsByClassName('preloader');
+  preloader[0].classList.add('out')
+  setTimeout(() => {
+    preloader[0].style.display = 'none';
+  }, 1000);
+}
