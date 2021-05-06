@@ -13,17 +13,17 @@ function buildVideo() {
     playerVars: {
       playsinline: 1,
     },
-    events: {
-      onReady: function (event) {
-        event.target.playVideo();
-      },
-      onStateChange: function (event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(() => player.stopVideo(), 6000);
-          done = true;
-        }
-      },
-    },
+    // events: {
+    //   onReady: function (event) {
+    //     event.target.playVideo();
+    //   },
+    //   onStateChange: function (event) {
+    //     if (event.data == YT.PlayerState.PLAYING && !done) {
+    //       setTimeout(() => player.stopVideo(), 6000);
+    //       done = true;
+    //     }
+    //   },
+    // },
   });
   // };
 }

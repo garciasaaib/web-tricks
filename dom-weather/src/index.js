@@ -25,21 +25,26 @@ form.addEventListener("submit", async function (e) {
   const apiURL = api(inputText);
   const response = await fetch(apiURL);
   const data = await response.json();
+  const iconData = await icon(data.weather[0].icon)
+ 
   
   if (data.cod == 200) {
-    console.log(cardList);
     const idExists = cardList.includes(data.sys.id)
   
     if (idExists) {
       e.target[0].value = ""
       return validateMessage("double")
     }
-  
+    
     cardList.push(data.sys.id)
-    const card = createCard(data);
-    weatherContainer.append(card);
-    e.target[0].value = "";
-    return validateMessage("clean");
+    const card = createCard(data, iconData);
+    if (card) {
+      weatherContainer.append(card);
+      e.target[0].value = "";
+      return validateMessage("clean");
+    } else {
+      console.log('cargando')
+    }
 
   } else {
     e.target[0].value = "";
@@ -57,8 +62,8 @@ const validateMessage = (command) => {
   span.textContent = messages[command];
 };
 
-const createCard = (data) => {
-  const cardIcon = icon(data.weather[0].icon)
+const createCard =  (data, icon) => {
+  const cardIcon = icon //
   const cardTemp = Math.round(data.main.temp)
   const card = hs(
     "div.card.bg-indigo-50.rounded-lg.p-6.py-10",
@@ -71,7 +76,9 @@ const createCard = (data) => {
     hs("img", { src: cardIcon }),
     hs("p.text-blue-900.text-base.text-left", data.weather[0].description.toUpperCase())
   );
-
+  card.children[2].onload = () => {
+    card.style.animation= "apear ease 0.5s forwards"
+  }
   return card;
 };
 
